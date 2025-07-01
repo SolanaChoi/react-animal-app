@@ -1,16 +1,18 @@
 {
   "files": {
     "main.css": "/react-animal-app/static/css/main.3553c8a8.css",
-    "main.js": "/react-animal-app/static/js/main.88531044.js",
+    "main.js": "/react-animal-app/static/js/main.bcbb8a88.js",
     "static/js/453.5f347170.chunk.js": "/react-animal-app/static/js/453.5f347170.chunk.js",
+    "static/media/elephant.png": "/react-animal-app/static/media/elephant.5795e27b560a669b9313.png",
+    "static/media/bear.png": "/react-animal-app/static/media/bear.93a08151ce2f3c23650a.png",
     "static/media/logo.svg": "/react-animal-app/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/react-animal-app/index.html",
     "main.3553c8a8.css.map": "/react-animal-app/static/css/main.3553c8a8.css.map",
-    "main.88531044.js.map": "/react-animal-app/static/js/main.88531044.js.map",
+    "main.bcbb8a88.js.map": "/react-animal-app/static/js/main.bcbb8a88.js.map",
     "453.5f347170.chunk.js.map": "/react-animal-app/static/js/453.5f347170.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3553c8a8.css",
-    "static/js/main.88531044.js"
+    "static/js/main.bcbb8a88.js"
   ]
 }
