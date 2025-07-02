@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div>
-      <PageTitle>{count}페이지🌴</PageTitle>
+      <PageTitle>💨{count}페이지💨</PageTitle>
       <AnimalForm updateMainAnimal={updateMainCard} />
       <MainCard
         src={mainAnimal}
