@@ -3,48 +3,51 @@ import React from 'react';
 import PageTitle from './components/PageTitle';
 import AnimalForm from "./components/AnimalForm";
 import MainCard from './components/MainCard';
-import AnimalItem from './components/AnimalItem';
 import Favorites from './components/Favorites';
 
 
-const jsonLocalStorage = {
-  setItem: (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  },
-  getItem: (key) => {
-    return JSON.parse(localStorage.getItem(key));
-  },
+// const jsonLocalStorage = {
+//   setItem: (key, value) => {
+//     localStorage.setItem(key, JSON.stringify(value));
+//   },
+//   getItem: (key) => {
+//     return JSON.parse(localStorage.getItem(key));
+//   },
+// };
+
+//Open API
+const fetchCat = async (text) => {
+  console.log('fetchCat() 함수 실행');
+
+  const response = await fetch(`https://cataas.com/cat/says/${text}?json=true`);
+  const data = await response.json();
+  const imgURL = data.url
+
+  console.log('response...', response);
+
+  return imgURL
 };
 
-
 function App() {
-  const animal01 = process.env.PUBLIC_URL + "/img/fox.png";
-  const animal02 = process.env.PUBLIC_URL + "/img/elephant.png";
-
-  const [mainAnimal, setMainAnimal] = React.useState(animal01);
-
-  const [favorites, setFavorites]
-    = React.useState(() => {
-      return jsonLocalStorage.getItem("favorites") || [];
-    });
-
-  const [count, setCount]
-    = React.useState(() => {
-      return jsonLocalStorage.getItem("count") || 1;
-    });
+  const [mainAnimal, setMainAnimal] = React.useState("https://cataas.com/cat");
+  const [favorites, setFavorites] = React.useState(() => localStorage.getItem("favorites") || []);
+  const [count, setCount] = React.useState(() => localStorage.getItem("count") || 1);
 
   const choiceFavorite = favorites.includes(mainAnimal);
+
 
   function incrementCount() {
     setCount((set) => {
       const nextCount = set + 1;
-      jsonLocalStorage.setItem("count", nextCount);
+      localStorage.setItem("count", nextCount);
       return nextCount;
     });
   }
 
-  function updateMainCard() {
-    setMainAnimal(animal02);
+  async function updateMainAnimal() {
+    const newCat = await fetchCat()
+
+    setMainAnimal(newCat);
     incrementCount();
   }
 
@@ -59,10 +62,10 @@ function App() {
   return (
     <div>
       <PageTitle>💨{count}페이지💨</PageTitle>
-      <AnimalForm updateMainAnimal={updateMainCard} />
+      <AnimalForm updateMainAnimal={updateMainAnimal} />
       <MainCard
         src={mainAnimal}
-        alt="fox"
+        alt="고야미"
         handleHeartClick={handleHeartClick}
         choiceFavorite={choiceFavorite}
       />
