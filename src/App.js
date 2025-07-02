@@ -1,71 +1,68 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import PageTitle from './components/PageTitle';
-import AnimalForm from './components/AnimalForm';
+import AnimalForm from "./components/AnimalForm";
 import MainCard from './components/MainCard';
+import AnimalItem from './components/AnimalItem';
 import Favorites from './components/Favorites';
-import bear from './img/bear.png'; import elephant from './img/elephant.png';
 
 
 const jsonLocalStorage = {
   setItem: (key, value) => {
-    console.log('localStorage.setItem 실행');
     localStorage.setItem(key, JSON.stringify(value));
   },
   getItem: (key) => {
-    console.log('localStorage.getItem 실행');
     return JSON.parse(localStorage.getItem(key));
   },
 };
 
-function App() {
-  console.log('** App 실행 **');
 
-  const animal01 = bear;
-  const animal02 = elephant;
+function App() {
+  const animal01 = process.env.PUBLIC_URL + "/img/fox.png";
+  const animal02 = process.env.PUBLIC_URL + "/img/elephant.png";
 
   const [mainAnimal, setMainAnimal] = React.useState(animal01);
-  const [favorites, setFavorites] = React.useState(() => {
-    console.log('favorite useState() 실행됨!');
-    return jsonLocalStorage.getItem('favorites') || []
-  });
-  const [count, setCount] = React.useState(() => {
-    console.log('count useState() 실행됨!');
-    return jsonLocalStorage.getItem('count') || 1;
-  });
+
+  const [favorites, setFavorites]
+    = React.useState(() => {
+      return jsonLocalStorage.getItem("favorites") || [];
+    });
+
+  const [count, setCount]
+    = React.useState(() => {
+      return jsonLocalStorage.getItem("count") || 1;
+    });
 
   const choiceFavorite = favorites.includes(mainAnimal);
 
   function incrementCount() {
-    setCount((pre) => {
-      const nextCount = pre + 1;
-      localStorage.setItem('count', JSON.stringify(nextCount));
-      return nextCount
+    setCount((set) => {
+      const nextCount = set + 1;
+      jsonLocalStorage.setItem("count", nextCount);
+      return nextCount;
     });
   }
 
-  function updateMainAnimal() {
+  function updateMainCard() {
     setMainAnimal(animal02);
     incrementCount();
   }
 
   function handleHeartClick() {
-    console.log('하트 버튼 클릭');
     setFavorites((pre) => {
       const nextFavorites = [...pre, mainAnimal];
-      localStorage.setItem('favorites', JSON.stringify(nextFavorites));
-      return nextFavorites
+      localStorage.setItem("favorites", JSON.stringify(nextFavorites));
+      return nextFavorites;
     });
   }
 
   return (
     <div>
-      <PageTitle>{count} 페이지 💌</PageTitle>
-      <AnimalForm updateMainAnimal={updateMainAnimal} />
+      <PageTitle>{count}페이지🌴</PageTitle>
+      <AnimalForm updateMainAnimal={updateMainCard} />
       <MainCard
         src={mainAnimal}
-        alt="아기 곰"
+        alt="fox"
         handleHeartClick={handleHeartClick}
         choiceFavorite={choiceFavorite}
       />
