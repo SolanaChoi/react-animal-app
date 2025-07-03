@@ -6,20 +6,20 @@ import MainCard from './components/MainCard';
 import Favorites from './components/Favorites';
 
 
-// const jsonLocalStorage = {
-//   setItem: (key, value) => {
-//     localStorage.setItem(key, JSON.stringify(value));
-//   },
-//   getItem: (key) => {
-//     return JSON.parse(localStorage.getItem(key));
-//   },
-// };
+const jsonLocalStorage = {
+  setItem: (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+  getItem: (key) => {
+    return JSON.parse(localStorage.getItem(key));
+  },
+};
 
 //Open API
 const fetchCat = async (text) => {
   console.log('fetchCat() 함수 실행');
 
-  const response = await fetch(`https://cataas.com/cat/says/${text}?json=true`);
+  const response = await fetch(`https://cataas.com/cat/says/${text}?json=true&width=400&height=400`);
   const data = await response.json();
   const imgURL = data.url
 
@@ -30,8 +30,8 @@ const fetchCat = async (text) => {
 
 function App() {
   const [mainAnimal, setMainAnimal] = React.useState("https://cataas.com/cat");
-  const [favorites, setFavorites] = React.useState(() => localStorage.getItem("favorites") || []);
-  const [count, setCount] = React.useState(() => localStorage.getItem("count") || 1);
+  const [favorites, setFavorites] = React.useState(() => jsonLocalStorage.getItem("favorites") || []);
+  const [count, setCount] = React.useState(() => jsonLocalStorage.getItem("count") || 1);
 
   const choiceFavorite = favorites.includes(mainAnimal);
 
@@ -44,8 +44,8 @@ function App() {
     });
   }
 
-  async function updateMainAnimal() {
-    const newCat = await fetchCat()
+  async function updateMainAnimal(text) {
+    const newCat = await fetchCat(text)
 
     setMainAnimal(newCat);
     incrementCount();

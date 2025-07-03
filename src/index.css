@@ -6,10 +6,18 @@ form {
   margin-bottom: 20px;
 }
 
+.main-card .main-img{
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border: 5px solid rgb(178, 112, 253);
+
+}
+
 .main-card button {
   position: relative;
   left: -45px;
-  top: -13px;
+  top: -20px;
 }
 
 .favorites {
@@ -25,4 +33,8 @@ form {
 
 .favorites img {
   width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid rgb(219, 196, 245);
+
 }
