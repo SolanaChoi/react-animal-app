@@ -1,29 +1,16 @@
-import './App.css';
 import React from 'react';
-import PageTitle from './components/PageTitle';
-import AnimalForm from "./components/AnimalForm";
-import MainCard from './components/MainCard';
-import Favorites from './components/Favorites';
+import PageTitle from './components/PageTitle/PageTitle';
+import AnimalForm from "./components/AnimalForm/AnimalForm";
+import MainCard from './components/MainCard/MainCard';
+import Favorites from './components/Favorites/Favorites';
+import jsonLocalStorage from './utils/jsonLocalStorage';
 
-
-const jsonLocalStorage = {
-  setItem: (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  },
-  getItem: (key) => {
-    return JSON.parse(localStorage.getItem(key));
-  },
-};
 
 //Open API
 const fetchCat = async (text) => {
-  console.log('fetchCat() 함수 실행');
-
   const response = await fetch(`https://cataas.com/cat/says/${text}?json=true&width=400&height=400`);
   const data = await response.json();
   const imgURL = data.url
-
-  console.log('response...', response);
 
   return imgURL
 };
@@ -52,6 +39,12 @@ function App() {
   }
 
   function handleHeartClick() {
+
+    if(favorites.includes(mainAnimal)){
+      alert("이미 추가된 고양이입니다!");
+      return
+    }
+
     setFavorites((pre) => {
       const nextFavorites = [...pre, mainAnimal];
       localStorage.setItem("favorites", JSON.stringify(nextFavorites));
@@ -61,6 +54,7 @@ function App() {
 
   return (
     <div>
+      <h1>CUTE CAT 😼 DICTIONARY</h1>  
       <PageTitle>💨{count}페이지💨</PageTitle>
       <AnimalForm updateMainAnimal={updateMainAnimal} />
       <MainCard

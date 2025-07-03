@@ -1,0 +1,12 @@
+.listItem {
+    list-style: none;
+    padding: 2px;
+  }
+  
+  .animalImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 35px;
+    object-fit: cover;
+    border: 3px solid rgb(219, 196, 245);
+  }

@@ -1,6 +1,10 @@
 import React from "react";
+import styles from './AnimalForm.module.css'
 
 const AnimalForm = ({ updateMainAnimal }) => {
+    console.log('**App 실행**');
+    
+
     const [value, setValue] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -29,12 +33,12 @@ const AnimalForm = ({ updateMainAnimal }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.animalForm} onSubmit={handleSubmit}>
             <input
                 type="text"
                 name="name"
                 id="name"
-                placeholder="귀여운 동물을 입력하세요."
+                placeholder="고양이가 할 말을 입력하세요."
                 onChange={handleInputChange}
                 value={value}
             />
